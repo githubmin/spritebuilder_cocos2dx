@@ -361,7 +361,7 @@ ActionInterval* CCBAnimationManager::getAction(CCBKeyframe *pKeyframe0, CCBKeyfr
             return Sequence::createWithTwoActions(DelayTime::create(duration), Hide::create());
         }
     }
-    else if (propName == "displayFrame")
+    else if (propName == "displayFrame" || propName == "spriteFrame")
     {
         return Sequence::createWithTwoActions(DelayTime::create(duration),
                     CCBSetSpriteFrame::create(static_cast<SpriteFrame*>(pKeyframe1->getObject())));
@@ -503,7 +503,7 @@ void CCBAnimationManager::setAnimatedProperty(const std::string& propName, Node 
                 unsigned char opacity = value.asFloat() * 255.0f;//value.asByte();
                 pNode->setOpacity(opacity);
             }
-            else if (propName == "displayFrame")
+            else if (propName == "displayFrame" || propName == "spriteFrame")
             {
                 static_cast<Sprite*>(pNode)->setSpriteFrame(static_cast<SpriteFrame*>(obj));
             }

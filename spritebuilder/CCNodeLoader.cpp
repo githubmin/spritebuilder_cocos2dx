@@ -127,10 +127,10 @@ void NodeLoader::parseProperties(Node * pNode, Node * pParent, CCBReader * ccbRe
         }
         else if (isExtraProp && pNode == ccbReader->getAnimationManager()->getRootNode())
         {
-            __Array *extraPropsNames = static_cast<__Array*>(pNode->getUserObject());
+            CCSet *extraPropsNames = static_cast<CCSet*>(pNode->getUserObject());
             if (! extraPropsNames)
             {
-                extraPropsNames = Array::create();
+                extraPropsNames = CCSet::create();
                 pNode->setUserObject(extraPropsNames);
             }
             

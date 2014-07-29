@@ -68,10 +68,14 @@ float CCBReader::getPTMRatio() {
 void CCBReader::setupSpriteBuilder(const char* resourcePath, float ptmRatio) {
 
     _ptmRatio = ptmRatio;
+    
     std::vector<std::string> searchPath;
     searchPath.push_back("Published-iOS");
     FileUtils::getInstance()->setSearchPaths(searchPath);
-//    FileUtils::getInstance()->addSearchPath("Published-iOS")
+    char docPath[256] = {0};
+    sprintf(docPath, "%s/Published-iOS", FileUtils::getInstance()->getWritablePath().c_str());
+    FileUtils::getInstance()->addSearchPath(docPath, true);
+    
     FileUtils::getInstance()->addSearchResolutionsOrder(resourcePath);
 
     FileUtils::getInstance()->loadFilenameLookupDictionaryFromFile("fileLookup.plist");
@@ -1409,8 +1413,9 @@ CCBKeyframe* CCBReader::readKeyframe(PropertyType type)
         std::string spriteFile = readCachedString();
         //std::string spriteSheet = readCachedString();
         
-        SpriteFrame* spriteFrame;
+        SpriteFrame* spriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName(spriteFile);
         //if (spriteSheet.length() == 0)
+        if (spriteFrame == nullptr)
         {
             spriteFile = _CCBRootPath + spriteFile;
             
@@ -1435,6 +1440,9 @@ CCBKeyframe* CCBReader::readKeyframe(PropertyType type)
          spriteFrame = frameCache->getSpriteFrameByName(spriteFile.c_str());
          }
          */
+        
+        keyframe->setObject(spriteFrame);
+        
     } else {
         CCASSERT(false, "Unknown keyframe type!");
     }
