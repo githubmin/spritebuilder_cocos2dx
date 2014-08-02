@@ -11,6 +11,9 @@ using namespace std;
 
 namespace spritebuilder {
 
+/* Define the button move threshold for cancel actions */
+#define kMoveThreshold      20.0
+
 class CCButton : public Control
 {
 public:
@@ -164,6 +167,7 @@ protected:
     
     Point   m_pOldPos;
     bool    m_bMoved;
+    CC_SYNTHESIZE_PASS_BY_REF(float, m_moveThreshold, MoveThreshold);
     
     /** The current title that is displayed on the button. */
     std::string _currentTitle;
@@ -197,7 +201,7 @@ private:
     CC_DISALLOW_COPY_AND_ASSIGN(CCButton);
     
 public:
-    std::function<void(Ref*)> onTouchUpInside;
+    std::function<void(Ref*)> onTouchUpInside;      // high pirority than [sendActionsForControlEvents(Control::EventType::TOUCH_UP_INSIDE)]
     
 };
 

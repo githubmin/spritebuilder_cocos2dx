@@ -16,6 +16,7 @@ CCButton::CCButton()
 , _zoomOnTouchDown(false)
 , m_bMoved(false)
 , m_pOldPos(Point())
+, m_moveThreshold(kMoveThreshold)
 , onTouchUpInside(nullptr)
 {
     
@@ -513,7 +514,8 @@ void CCButton::onTouchMoved(Touch *pTouch, Event *pEvent)
     
     //TODO: parent is null
     Point p = getParent()->convertToWorldSpace(getPosition());
-    if(fabsf(p.x - m_pOldPos.x) > 20.0f || fabsf(p.y - m_pOldPos.y) > 20.0f) {
+    if(fabsf(p.x - m_pOldPos.x) > m_moveThreshold ||
+       fabsf(p.y - m_pOldPos.y) > m_moveThreshold) {
         m_bMoved = true;
     }
     
@@ -553,10 +555,10 @@ void CCButton::onTouchEnded(Touch *pTouch, Event *pEvent)
     
     if (isTouchInside(pTouch))
     {
-        sendActionsForControlEvents(Control::EventType::TOUCH_UP_INSIDE);
-        
         if (onTouchUpInside) {
             onTouchUpInside(this);
+        }else {
+            sendActionsForControlEvents(Control::EventType::TOUCH_UP_INSIDE);
         }
     }
     else
