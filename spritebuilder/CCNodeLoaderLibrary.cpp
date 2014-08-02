@@ -18,6 +18,7 @@
 #include "CCLayoutBoxLoader.h"
 #include "CCSliderLoader.h"
 #include "CCTextFieldLoader.h"
+#include "CCButtonLoader.h"
 
 using namespace cocos2d;
 
@@ -55,7 +56,8 @@ void NodeLoaderLibrary::registerDefaultNodeLoaders() {
     this->registerNodeLoader("CCNodeGradient", LayerGradientLoader::loader());
     this->registerNodeLoader("CCNodeColor", LayerColorLoader::loader());
     
-    this->registerNodeLoader("CCButton", ControlButtonLoader::loader());
+    this->registerNodeLoader("CCButton", CCButtonLoader::loader());
+//    this->registerNodeLoader("CCButton", ControlButtonLoader::loader());
     this->registerNodeLoader("CCPhysicsNode", PhysicsNodeLoader::loader());
     
     this->registerNodeLoader("CCLayoutBox", LayoutBoxLoader::loader());

@@ -30,5 +30,6 @@
 #include "spritebuilder/CCBLocalizationManager.h"
 #include "spritebuilder/CCPhysicsNode.h"
 #include "spritebuilder/CCBPhysicsBody.h"
+#include "spritebuilder/CCButton.h"
 
 #endif // __EDITOR_SUPPORT_SPRITEBUILDER_H__
