@@ -1293,8 +1293,16 @@ void NodeLoader::onHandlePropTypeFntFile(Node * pNode, Node * pParent, const cha
 
 void NodeLoader::onHandlePropTypeString(Node * pNode, Node * pParent, const char* pPropertyName, const char * pString, CCBReader * ccbReader) {
 //    ASSERT_FAIL_UNEXPECTED_PROPERTY(pPropertyName);
-    // It may be a custom property, add it to custom property dictionary.
-    _customProperties[pPropertyName] = Value(pString);
+    if(strcmp(pPropertyName, PROPERTY_NAME) == 0) {
+#if COCOS2D_VERSION >= 0x030200
+        pNode->setName(pString);
+#else
+        CCLOG("NOT supported setName() on current cocos2d version");
+#endif
+    }else {
+        // It may be a custom property, add it to custom property dictionary.
+        _customProperties[pPropertyName] = Value(pString);
+    }
 }
 
 void NodeLoader::onHandlePropTypeText(Node * pNode, Node * pParent, const char* pPropertyName, const char * pText, CCBReader * ccbReader) {
