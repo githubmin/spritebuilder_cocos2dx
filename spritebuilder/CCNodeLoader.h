@@ -19,6 +19,7 @@ namespace spritebuilder {
 #define PROPERTY_TAG "tag"
 #define PROPERTY_IGNOREANCHORPOINTFORPOSITION "ignoreAnchorPointForPosition"
 #define PROPERTY_VISIBLE "visible"
+#define PROPERTY_NAME "name"
 
 #define ASSERT_FAIL_UNEXPECTED_PROPERTY(PROPERTY) cocos2d::log("Unexpected property: '%s'!\n", PROPERTY); assert(false)
 #define ASSERT_FAIL_UNEXPECTED_PROPERTYTYPE(PROPERTYTYPE) cocos2d::log("Unexpected property type: '%d'!\n", PROPERTYTYPE); assert(false)
