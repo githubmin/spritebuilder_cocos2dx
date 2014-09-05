@@ -62,7 +62,19 @@ void NodeLoader::parseProperties(Node * pNode, Node * pParent, CCBReader * ccbRe
                 // Skip properties that doesn't have a value to override
                 CCSet* extraPropsNames = (CCSet*)pNode->getUserObject();
 
-                setProp &= extraPropsNames->containsObject(CCString::create(propertyName));
+                bool foundProperty = false;
+                __SetIterator it;
+                for( it = extraPropsNames->begin(); it != extraPropsNames->end(); ++it) {
+                    __String *propName = (__String*)*it;
+                    if (strcmp(propertyName.c_str(), propName->getCString()) == 0) {
+                        foundProperty = true;
+                        break;
+                    }
+                }
+                
+                setProp &= foundProperty;
+                
+//                setProp &= extraPropsNames->containsObject(CCString::create(propertyName));
             }
         }
         else if (isExtraProp && pNode == ccbReader->getAnimationManager()->getRootNode())
